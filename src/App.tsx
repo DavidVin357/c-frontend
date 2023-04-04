@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 function App() {
   useEffect(() => {
     window.addEventListener('warning', (e: any) => {
-      console.log('warning event', e)
       setWarnings((prev) => [...prev, e.detail.message])
     })
   }, [])
@@ -16,16 +15,24 @@ function App() {
 
   }`)
   const [warnings, setWarnings] = useState<string[]>([])
+  const [error, setError] = useState('')
+  const [result, setResult] = useState('')
+  const clearOutput = () => {
+    setWarnings([])
+    setError('')
+    setResult('')
+  }
   const runCode = () => {
+    clearOutput()
     try {
       const result = run(code)
       setResult((prev) => prev.concat('\n' + result))
     } catch (e: any) {
-      setResult(e.message)
+      console.log(e.message)
+      setError('Compile Error')
     }
   }
 
-  const [result, setResult] = useState('')
   return (
     <ThemeProvider theme={theme}>
       <Box>
@@ -41,7 +48,7 @@ function App() {
 
         <Grid columns={[2, '1fr 1fr']} px={3} gap={4}>
           <Code code={code} onChange={(code) => setCode(code)} />
-          <Runtime warnings={warnings} result={result} />
+          <Runtime warnings={warnings} error={error} result={result} />
         </Grid>
       </Box>
     </ThemeProvider>

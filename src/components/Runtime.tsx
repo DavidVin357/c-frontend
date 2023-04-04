@@ -2,8 +2,9 @@ import { Box, Card, Flex, Paragraph, Text, Textarea } from 'theme-ui'
 interface Props {
   result: string
   warnings: string[]
+  error: string
 }
-const Runtime = ({ result, warnings }: Props) => {
+const Runtime = ({ result, warnings, error }: Props) => {
   return (
     <Flex sx={{ flexDirection: 'column', gap: 3, minHeight: '100%' }}>
       <Card>
@@ -17,19 +18,31 @@ const Runtime = ({ result, warnings }: Props) => {
       <Box
         sx={{ border: '1px solid #fff', p: 2, borderRadius: 3 }}
         className='output'>
+        {/* Warnings */}
         {warnings.map((w, i) => (
           <Box key={i}>
-            <Text sx={{ color: 'red' }}>
+            <Text color='#EEC643'>
               Warning: <br />
             </Text>
             <Text>{w}</Text>
             <br />
           </Box>
         ))}
-        {/* <Text sx={{ fontWeight: 'bold' }}>
-          Result: <br />
-        </Text> */}
-        <Text>{result}</Text>
+        {/* Error */}
+        {error && (
+          <Box>
+            <Text color='#ED4242'>{error}</Text>
+          </Box>
+        )}
+        {/*  Result */}
+        {result && (
+          <Box>
+            <Text sx={{ fontWeight: 'bold' }}>
+              Result: <br />
+            </Text>
+            <Text>{result}</Text>
+          </Box>
+        )}
       </Box>
     </Flex>
   )
