@@ -11,14 +11,29 @@ function App() {
       setWarnings((prev) => [...prev, e.detail.message])
     })
   }, [])
+
+  useEffect(() => {
+    window.addEventListener('table', (e: any) => {
+      setPrintResult((prev) => [...prev, e.detail.message])
+    })
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('printf', (e: any) => {
+      setPrintResult((prev) => [...prev, e.detail.message])
+    })
+  }, [])
+
   const [code, setCode] = useState(`int main() {
 
   }`)
   const [warnings, setWarnings] = useState<string[]>([])
   const [error, setError] = useState('')
   const [result, setResult] = useState('')
+  const [printResult, setPrintResult] = useState<string[]>([])
   const clearOutput = () => {
     setWarnings([])
+    setPrintResult([])
     setError('')
     setResult('')
   }
@@ -48,7 +63,13 @@ function App() {
 
         <Grid columns={[2, '1fr 1fr']} px={3} gap={4}>
           <Code code={code} onChange={(code) => setCode(code)} />
-          <Runtime warnings={warnings} error={error} result={result} />
+          <Runtime
+            warnings={warnings}
+            error={error}
+            result={result}
+            printResult={printResult}
+            clearOutput={clearOutput}
+          />
         </Grid>
       </Box>
     </ThemeProvider>
