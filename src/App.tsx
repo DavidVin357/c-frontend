@@ -40,7 +40,7 @@ function App() {
   const runCode = () => {
     clearOutput()
     try {
-      const result = run(code)
+      const result = run(code.replaceAll('\\n', '\n').replaceAll('\\0', '\0'))
       setResult((prev) => prev.concat('\n' + result))
     } catch (e: any) {
       console.log(e.message)
