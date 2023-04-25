@@ -10,7 +10,7 @@ Before building, link the clang interpreter package with `npm link`
 To build:
 ```
 git clone https://github.com/DavidVin357/c-frontend.git
-cd calc-slang
+cd c-lang
 npm i
 npm link c-lang
 npm run build
