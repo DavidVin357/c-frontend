@@ -10,9 +10,9 @@ Before building, link the clang interpreter package with `npm link`
 To build:
 ```
 git clone https://github.com/DavidVin357/c-frontend.git
-cd c-lang
+cd c-frontend
 npm i
-npm link c-lang
+npm link 'c-lang'
 npm run build
 ```
 
