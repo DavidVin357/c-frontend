@@ -1,6 +1,7 @@
 {
   "name": "c-frontend",
   "version": "0.1.0",
+  "homepage": "https://DavidVin357.github.io/c-frontend",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -29,7 +30,9 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-copy-to-clipboard": "^5.0.4"
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "gh-pages": "^5.0.0"
   }
 }
