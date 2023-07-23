@@ -1,9 +1,13 @@
-import { Flex, ThemeProvider, Grid, Box, Heading, Button } from 'theme-ui'
+/** @jsxImportSource theme-ui */
+
+import { Flex, ThemeProvider, Grid, Box, Heading, Button, Text } from 'theme-ui'
 import theme from './theme'
 import Runtime from './components/Runtime'
 import Code from './components/Code'
 import { run } from 'c-lang/dist'
 import { useEffect, useState } from 'react'
+import codeChunks from './code-chunks'
+import CodeExample from './components/CodeExample'
 
 function App() {
   useEffect(() => {
@@ -24,9 +28,7 @@ function App() {
     })
   }, [])
 
-  const [code, setCode] = useState(`int main() {
-
-  }`)
+  const [code, setCode] = useState(codeChunks[0].code)
   const [warnings, setWarnings] = useState<string[]>([])
   const [error, setError] = useState('')
   const [result, setResult] = useState('')
@@ -62,7 +64,7 @@ function App() {
         </Flex>
 
         <Grid columns={[2, '1fr 1fr']} px={3} gap={4}>
-          <Code code={code} onChange={(code) => setCode(code)} />
+          <Code code={code} onChange={(code: string) => setCode(code)} />
           <Runtime
             warnings={warnings}
             error={error}
@@ -71,6 +73,35 @@ function App() {
             clearOutput={clearOutput}
           />
         </Grid>
+
+        <Box py={5}>
+          <Heading as='h2' p={4}>
+            Other Code Examples
+          </Heading>
+          <Grid
+            sx={{
+              px: 4,
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: 5,
+            }}>
+            {codeChunks.map((example) => (
+              <CodeExample title={example.title} code={example.code} />
+            ))}
+          </Grid>
+        </Box>
+        <footer>
+          Some examples are taken from
+          <a
+            sx={{
+              textDecoration: 'none',
+              color: '#64074D',
+            }}
+            target='_blank'
+            href='https://www.geeksforgeeks.org/c-programming-examples/'>
+            {' '}
+            GeeksForGeeks
+          </a>
+        </footer>
       </Box>
     </ThemeProvider>
   )

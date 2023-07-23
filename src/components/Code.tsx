@@ -1,13 +1,15 @@
 import Editor from 'react-simple-code-editor'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import darkTheme from 'prism-react-renderer/themes/nightOwl'
+import { LuCopy } from 'react-icons/lu'
 
 interface PropsTypes {
   code: string
 
   onChange: (code: string) => void
+  style?: object
 }
-const Code = ({ code, onChange }: PropsTypes) => {
+const Code = ({ code, onChange, style }: PropsTypes) => {
   const highlight = (code: string) => (
     <Highlight {...defaultProps} theme={darkTheme} code={code} language='c'>
       {({ tokens, getLineProps, getTokenProps }) => (
@@ -36,6 +38,7 @@ const Code = ({ code, onChange }: PropsTypes) => {
         border: '1px solid #ffffff',
         borderRadius: '2px',
         height: '100%',
+        ...style,
       }}
       insertSpaces={true}
     />
