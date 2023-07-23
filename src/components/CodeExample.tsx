@@ -56,7 +56,7 @@ const CodeExample = ({ code, title }: PropsTypes) => {
         onChange={() => {}}
         style={{
           borderRadius: '15px',
-          fontSize: 3,
+          fontSize: 11,
           borderColor: '#64074D',
         }}
       />
