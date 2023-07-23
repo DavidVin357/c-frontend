@@ -1,15 +1,17 @@
-const findFactorial = `int main(int n) {
+const findFactorial = `int main()
+{
     // Find factorial of n
     int n = 6;
-
-    int factorial = multiplyNumbers(n);
+    int factorial = findFactorial(n);
     printf("Factorial of %d is %d", n, factorial);
     return factorial;
 }
 
-int multiplyNumbers(int n) {
-    if (n>=1) {
-        return n*multiplyNumbers(n-1);
+int findFactorial(int n)
+{
+    if (n >= 1)
+    {
+        return n * findFactorial(n - 1);
     }
     return 1;
 }`
